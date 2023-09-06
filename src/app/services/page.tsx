@@ -1,9 +1,11 @@
-import Services from "@/components/Services";
+import { OurServices } from "./OurServices";
+import { ServiceHero } from "./ServiceHero";
 
 export default function ServicesPage() {
   return (
     <main>
-      <Services />
+      <ServiceHero />
+      <OurServices />
     </main>
   );
 }

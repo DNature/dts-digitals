@@ -30,9 +30,9 @@ export function Hero() {
         </p>
         <Link
           href={"/#more"}
-          className="px-10 my-7 h-20 text-xl text-white rounded-full btn hover:bg-primary"
+          className="px-10 bg-black my-7 h-20 text-xl text-white rounded-full btn hover:bg-primary"
         >
-          Explore
+          Explore more
         </Link>
       </div>
     </section>
