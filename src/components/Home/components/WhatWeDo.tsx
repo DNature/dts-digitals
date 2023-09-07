@@ -31,10 +31,13 @@ export function OurProcess() {
       className="w-full bg-[url(/get-bg.svg)] py-40 px-4 mt-10"
     >
       <div className="max-w-screen-xl mx-auto grid">
-        <h2 className="my-10">Our Process</h2>
+        <h2 data-aos="zoom-in-up" className="my-10">
+          Our Process
+        </h2>
         <div className="grid lg:grid-cols-2 justify-center my-20 gap-10 items-center">
           {data.map((item, id) => (
             <div
+              data-aos="zoom-in-up"
               key={id}
               className="self-center flex-1 z-10 card w-fit min-h-72 h-full md:h-64 bg-white p-6"
             >
