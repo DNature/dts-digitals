@@ -1,4 +1,4 @@
-import { MobileCard, WorksCard } from "@/app/works/MobileCard";
+import { ProjectCard } from "@/app/works/MobileCard";
 import { worksData } from "@/app/works/works";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,41 +6,24 @@ import Link from "next/link";
 export function Projects() {
   return (
     <section id="projects" className="w-full my-10 bg-base-80 py-40 px-4 mt-20">
-      <div className="grid max-w-screen-lg items-start mx-auto">
+      <div className="grid max-w-screen-xl items-start mx-auto">
         <h2 data-aos="zoom-in-up" className="text-start text-white">
           Latest Projects
         </h2>
 
-        <div className="mt-10">
-          <div className="flex flex-col gap-5 md:hidden mb-20">
-            {worksData.slice(0, 3).map((work, idx) => (
-              <MobileCard
-                description={work.description}
-                className=""
-                githubUrl=""
-                imageUrl={work.imageUrl}
-                tags={work.tags}
-                title={work.title}
-                websiteUrl={work.websiteUrl}
-                key={idx}
-              />
-            ))}
-          </div>
-
-          <div className="mx-auto max-w-screen-lg my-12 lg:px-0 hidden md:flex">
-            <div className="w-full flex flex-col">
-              {worksData.slice(0, 3).map((work, idx) => (
-                <WorksCard
-                  description={work.description}
-                  imageUrl={work.imageUrl}
-                  tags={work.tags}
-                  title={work.title}
-                  websiteUrl={work.websiteUrl}
-                  key={idx}
-                />
-              ))}
-            </div>
-          </div>
+        <div className="mt-10 flex flex-col items-center gap-5 md:grid grid-cols-3 mb-20">
+          {worksData.slice(0, 3).map((work, idx) => (
+            <ProjectCard
+              description={work.description}
+              className=""
+              githubUrl=""
+              imageUrl={work.imageUrl}
+              tags={work.tags}
+              title={work.title}
+              websiteUrl={work.websiteUrl}
+              key={idx}
+            />
+          ))}
         </div>
         <Link
           href={"/works"}

@@ -36,7 +36,7 @@ export function OurProcess() {
           {data.map((item, id) => (
             <div
               key={id}
-              className="self-center flex-1 z-10 card w-fit h-60 bg-white p-6"
+              className="self-center flex-1 z-10 card w-fit min-h-72 h-full md:h-64 bg-white p-6"
             >
               <h4 className="lg:mt-0 font-light">{item.title}</h4>
               <p className="my-4 text-gray-500 text-lg md:text-xl">

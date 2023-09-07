@@ -13,7 +13,7 @@ export function AboutCompany() {
         />
       </div>
       <div className="px-6 mx-auto max-w-screen-lg">
-        <h3 data-aos="zoom-in-up" className="my-10">
+        <h3 data-aos="zoom-in-up" className="my-10 leading-tight">
           <strong>
             Doing Things <em>digital</em>
           </strong>{" "}
