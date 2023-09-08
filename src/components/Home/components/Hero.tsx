@@ -19,7 +19,7 @@ export function Hero() {
         <span className="mb-4 text-3xl text-zinc-900">
           One-Stop Solution For All Your Business Needs
         </span>
-        <h1 className="font-bold lg:mt-10">
+        <h1 className="font-bold lg:mt-10 leading-tight">
           Creating <span className="text-primary">Softwares</span> & Digital
           Excellence
         </h1>
@@ -30,9 +30,9 @@ export function Hero() {
         </p>
         <Link
           href={"/#more"}
-          className="px-10 my-7 h-20 text-xl text-white rounded-full btn hover:bg-primary"
+          className="px-10 bg-black my-7 h-20 text-xl text-white rounded-full btn hover:bg-primary"
         >
-          Explore
+          Explore more
         </Link>
       </div>
     </section>
