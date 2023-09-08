@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
+import { ReduxProvider } from "@/redux/provider";
 
 const inter = Open_Sans({ subsets: ["greek-ext"] });
 
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MainLayout>{children}</MainLayout>
+        <ReduxProvider>
+          <MainLayout>{children}</MainLayout>
+        </ReduxProvider>
       </body>
     </html>
   );

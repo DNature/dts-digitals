@@ -1,13 +1,9 @@
-import { AboutCompany } from "./AboutCompany";
-import { WhatWeOffer } from "./WhatWeOffer";
-import { OurTeam } from "./OurTeam";
+import About from "@/components/About";
 
 export default function AboutPage() {
   return (
     <main>
-      <AboutCompany />
-      <WhatWeOffer />
-      <OurTeam />
+      <About />
     </main>
   );
 }

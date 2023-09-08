@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-
+import { logIn, logOut, toggleModerator } from "@/redux/features/authSlice";
+import { useDispatch } from "react-redux";
+import { AppDispatch, useAppSelector } from "@/redux/store";
 import clsx from "clsx";
 
 const formData = [
