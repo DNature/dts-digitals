@@ -1,4 +1,4 @@
-import { ProjectCard } from "@/app/works/MobileCard";
+import { ProjectCard } from "@/app/works/ProjectCard";
 import { worksData } from "@/app/works/works";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,12 +11,10 @@ export function Projects() {
           Latest Projects
         </h2>
 
-        <div className="mt-10 flex flex-col items-center gap-5 md:grid grid-cols-3 mb-20">
+        <div className="mt-10 mb-20">
           {worksData.slice(0, 3).map((work, idx) => (
             <ProjectCard
               description={work.description}
-              className=""
-              githubUrl=""
               imageUrl={work.imageUrl}
               tags={work.tags}
               title={work.title}
