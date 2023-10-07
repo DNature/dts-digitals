@@ -4,7 +4,11 @@ import Link from "next/link";
 
 export function Projects() {
   return (
-    <section id="projects" className="py-40 px-4 my-10 mt-20 w-full bg-base-80">
+    <section
+      id="projects"
+      className="py-40 px-4 my-10 mt-20 w-full bg-base-80"
+      style={{ overflowX: "hidden" }}
+    >
       <div className="grid items-start mx-auto max-w-screen-xl">
         <h2 data-aos="zoom-in-up" className="text-white text-start">
           Latest Projects

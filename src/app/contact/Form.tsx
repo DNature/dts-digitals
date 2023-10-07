@@ -35,7 +35,7 @@ export function Form() {
 
     if (response) {
       toast.success(
-        "We've received your email! We will get back to you shortly."
+        "We've received your email! We will get back to you shortly.",
       );
     } else {
       toast.error("Opps! Unable to save changes");
@@ -61,7 +61,7 @@ export function Form() {
           required={item.required}
           name={item.id}
           className={clsx(
-            "h-12 border bg-white border-gray-400 rounded-xl px-4 mt-6"
+            "h-12 border bg-white border-gray-400 rounded-xl px-4 mt-6",
           )}
         />
       ))}

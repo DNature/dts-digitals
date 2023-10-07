@@ -17,11 +17,11 @@ export async function sendEmail(formInput: any) {
     const accounts = await brevo.senders.getSenders();
     if (accounts.data?.senders) {
       const noReplyEmail = accounts.data.senders.find((sender) =>
-        sender.email.startsWith("no-reply@dtdigital.nl")
+        sender.email.startsWith("no-reply@dtdigital.nl"),
       );
 
       const contactEmail = accounts.data.senders.find((sender) =>
-        sender.email.startsWith("hello@dtdigital.nl")
+        sender.email.startsWith("hello@dtdigital.nl"),
       );
 
       const response1 = await brevo.smtp.sendTransacEmail({

@@ -43,7 +43,7 @@ export function Navbar() {
           ["block"]: showNavbar,
           "lg:hidden": !showNavbar,
           "backdrop-blur-lg": !isOpen,
-        }
+        },
       )}
     >
       <div className="flex z-10 justify-between items-center py-10 mx-auto w-full max-w-screen-2xl h-full">
@@ -79,8 +79,9 @@ export function Navbar() {
       </div>
 
       <div
-        className={`bg-white fixed menu overflow-auto -z-[1] right-0 left-0 top-0 bottom-0 opacity-0 transition-opacity duration-300 pt-20 px-5 ${isOpen ? "block opacity-100" : "hidden"
-          } lg:hidden`}
+        className={`bg-white fixed menu overflow-auto -z-[1] right-0 left-0 top-0 bottom-0 opacity-0 transition-opacity duration-300 pt-20 px-5 ${
+          isOpen ? "block opacity-100" : "hidden"
+        } lg:hidden`}
       >
         <div className="flex relative flex-col gap-7 justify-start items-start mt-10 cursor-pointer lg:hidden">
           <Link

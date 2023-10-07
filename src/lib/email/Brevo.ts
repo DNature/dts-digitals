@@ -955,7 +955,15 @@ export interface GetWhatsappCampaignOverview {
    * Status of the WhatsApp Campaign
    * @example "draft"
    */
-  campaignStatus: "draft" | "scheduled" | "pending" | "approved" | "running" | "suspended" | "rejected" | "sent";
+  campaignStatus:
+    | "draft"
+    | "scheduled"
+    | "pending"
+    | "approved"
+    | "running"
+    | "suspended"
+    | "rejected"
+    | "sent";
   /**
    * UTC date-time on which WhatsApp campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format
    * @example "2023-09-05T05:22:51.462Z"
@@ -1121,7 +1129,15 @@ export interface GetWhatsappCampaigns {
      * Status of the WhatsApp Campaign
      * @example "draft"
      */
-    campaignStatus: "draft" | "scheduled" | "pending" | "approved" | "running" | "suspended" | "rejected" | "sent";
+    campaignStatus:
+      | "draft"
+      | "scheduled"
+      | "pending"
+      | "approved"
+      | "running"
+      | "suspended"
+      | "rejected"
+      | "sent";
     /**
      * UTC date-time on which WhatsApp campaign is scheduled. Should be in YYYY-MM-DDTHH:mm:ss.SSSZ format
      * @example "2023-09-05T05:22:51.462Z"
@@ -2623,7 +2639,15 @@ export interface UpdateSmtpTemplate {
  */
 export interface UpdateCampaignStatus {
   /** Note:- replicateTemplate status will be available only for template type campaigns. */
-  status?: "suspended" | "archive" | "darchive" | "sent" | "queued" | "replicate" | "replicateTemplate" | "draft";
+  status?:
+    | "suspended"
+    | "archive"
+    | "darchive"
+    | "sent"
+    | "queued"
+    | "replicate"
+    | "replicateTemplate"
+    | "draft";
 }
 
 export interface CreateSmtpTemplate {
@@ -3148,7 +3172,13 @@ export interface RequestSmsRecipientExport {
    * Filter the recipients based on how they interacted with the campaign
    * @example "answered"
    */
-  recipientsType: "all" | "delivered" | "answered" | "softBounces" | "hardBounces" | "unsubscribed";
+  recipientsType:
+    | "all"
+    | "delivered"
+    | "answered"
+    | "softBounces"
+    | "hardBounces"
+    | "unsubscribed";
 }
 
 export interface SendReport {
@@ -3573,7 +3603,11 @@ export interface RequestContactExport {
   /** Only one of the two filter options (contactFilter or customContactFilter) can be passed in the request. Set the filter for the contacts to be exported. */
   customContactFilter?: {
     /** Mandatory if neither actionForEmailCampaigns nor actionForSmsCampaigns is passed. This will export the contacts on the basis of provided action applied on contacts as per the list id. * allContacts - Fetch the list of all contacts for a particular list. * subscribed & unsubscribed - Fetch the list of subscribed / unsubscribed (blacklisted via any means) contacts for a particular list. * unsubscribedPerList - Fetch the list of contacts that are unsubscribed from a particular list only. */
-    actionForContacts?: "allContacts" | "subscribed" | "unsubscribed" | "unsubscribedPerList";
+    actionForContacts?:
+      | "allContacts"
+      | "subscribed"
+      | "unsubscribed"
+      | "unsubscribedPerList";
     /** Mandatory if neither actionForContacts nor actionForSmsCampaigns is passed. This will export the contacts on the basis of provided action applied on email campaigns. * openers & nonOpeners - emailCampaignId is mandatory. Fetch the list of readers / non-readers for a particular email campaign. * clickers & nonClickers - emailCampaignId is mandatory. Fetch the list of clickers / non-clickers for a particular email campaign. * unsubscribed - emailCampaignId is mandatory. Fetch the list of all unsubscribed (blacklisted via any means) contacts for a particular email campaign. * hardBounces & softBounces - emailCampaignId is optional. Fetch the list of hard bounces / soft bounces for a particular / all email campaign(s). */
     actionForEmailCampaigns?:
       | "openers"
@@ -4196,16 +4230,22 @@ export interface FullRequestParams extends Omit<RequestInit, "body"> {
   cancelToken?: CancelToken;
 }
 
-export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
+export type RequestParams = Omit<
+  FullRequestParams,
+  "body" | "method" | "query" | "path"
+>;
 
 export interface ApiConfig<SecurityDataType = unknown> {
   baseUrl?: string;
   baseApiParams?: Omit<RequestParams, "baseUrl" | "cancelToken" | "signal">;
-  securityWorker?: (securityData: SecurityDataType | null) => Promise<RequestParams | void> | RequestParams | void;
+  securityWorker?: (
+    securityData: SecurityDataType | null,
+  ) => Promise<RequestParams | void> | RequestParams | void;
   customFetch?: typeof fetch;
 }
 
-export interface HttpResponse<D extends unknown, E extends unknown = unknown> extends Response {
+export interface HttpResponse<D extends unknown, E extends unknown = unknown>
+  extends Response {
   data: D;
   error: E;
 }
@@ -4224,7 +4264,8 @@ export class HttpClient<SecurityDataType = unknown> {
   private securityData: SecurityDataType | null = null;
   private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private abortControllers = new Map<CancelToken, AbortController>();
-  private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
+  private customFetch = (...fetchParams: Parameters<typeof fetch>) =>
+    fetch(...fetchParams);
 
   private baseApiParams: RequestParams = {
     credentials: "same-origin",
@@ -4243,7 +4284,9 @@ export class HttpClient<SecurityDataType = unknown> {
 
   protected encodeQueryParam(key: string, value: any) {
     const encodedKey = encodeURIComponent(key);
-    return `${encodedKey}=${encodeURIComponent(typeof value === "number" ? value : `${value}`)}`;
+    return `${encodedKey}=${encodeURIComponent(
+      typeof value === "number" ? value : `${value}`,
+    )}`;
   }
 
   protected addQueryParam(query: QueryParamsType, key: string) {
@@ -4257,9 +4300,15 @@ export class HttpClient<SecurityDataType = unknown> {
 
   protected toQueryString(rawQuery?: QueryParamsType): string {
     const query = rawQuery || {};
-    const keys = Object.keys(query).filter((key) => "undefined" !== typeof query[key]);
+    const keys = Object.keys(query).filter(
+      (key) => "undefined" !== typeof query[key],
+    );
     return keys
-      .map((key) => (Array.isArray(query[key]) ? this.addArrayQueryParam(query, key) : this.addQueryParam(query, key)))
+      .map((key) =>
+        Array.isArray(query[key])
+          ? this.addArrayQueryParam(query, key)
+          : this.addQueryParam(query, key),
+      )
       .join("&");
   }
 
@@ -4270,8 +4319,13 @@ export class HttpClient<SecurityDataType = unknown> {
 
   private contentFormatters: Record<ContentType, (input: any) => any> = {
     [ContentType.Json]: (input: any) =>
-      input !== null && (typeof input === "object" || typeof input === "string") ? JSON.stringify(input) : input,
-    [ContentType.Text]: (input: any) => (input !== null && typeof input !== "string" ? JSON.stringify(input) : input),
+      input !== null && (typeof input === "object" || typeof input === "string")
+        ? JSON.stringify(input)
+        : input,
+    [ContentType.Text]: (input: any) =>
+      input !== null && typeof input !== "string"
+        ? JSON.stringify(input)
+        : input,
     [ContentType.FormData]: (input: any) =>
       Object.keys(input || {}).reduce((formData, key) => {
         const property = input[key];
@@ -4288,7 +4342,10 @@ export class HttpClient<SecurityDataType = unknown> {
     [ContentType.UrlEncoded]: (input: any) => this.toQueryString(input),
   };
 
-  protected mergeRequestParams(params1: RequestParams, params2?: RequestParams): RequestParams {
+  protected mergeRequestParams(
+    params1: RequestParams,
+    params2?: RequestParams,
+  ): RequestParams {
     return {
       ...this.baseApiParams,
       ...params1,
@@ -4301,7 +4358,9 @@ export class HttpClient<SecurityDataType = unknown> {
     };
   }
 
-  protected createAbortSignal = (cancelToken: CancelToken): AbortSignal | undefined => {
+  protected createAbortSignal = (
+    cancelToken: CancelToken,
+  ): AbortSignal | undefined => {
     if (this.abortControllers.has(cancelToken)) {
       const abortController = this.abortControllers.get(cancelToken);
       if (abortController) {
@@ -4345,15 +4404,28 @@ export class HttpClient<SecurityDataType = unknown> {
     const payloadFormatter = this.contentFormatters[type || ContentType.Json];
     const responseFormat = format || requestParams.format;
 
-    return this.customFetch(`${baseUrl || this.baseUrl || ""}${path}${queryString ? `?${queryString}` : ""}`, {
-      ...requestParams,
-      headers: {
-        ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+    return this.customFetch(
+      `${baseUrl || this.baseUrl || ""}${path}${
+        queryString ? `?${queryString}` : ""
+      }`,
+      {
+        ...requestParams,
+        headers: {
+          ...(requestParams.headers || {}),
+          ...(type && type !== ContentType.FormData
+            ? { "Content-Type": type }
+            : {}),
+        },
+        signal:
+          (cancelToken
+            ? this.createAbortSignal(cancelToken)
+            : requestParams.signal) || null,
+        body:
+          typeof body === "undefined" || body === null
+            ? null
+            : payloadFormatter(body),
       },
-      signal: (cancelToken ? this.createAbortSignal(cancelToken) : requestParams.signal) || null,
-      body: typeof body === "undefined" || body === null ? null : payloadFormatter(body),
-    }).then(async (response) => {
+    ).then(async (response) => {
       const r = response as HttpResponse<T, E>;
       r.data = null as unknown as T;
       r.error = null as unknown as E;
@@ -4414,7 +4486,9 @@ export class HttpClient<SecurityDataType = unknown> {
  *   | 405  | Error. Method not allowed  |
  *   | 406  | Error. Not Acceptable  |
  */
-export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+export class Api<
+  SecurityDataType extends unknown,
+> extends HttpClient<SecurityDataType> {
   emailCampaigns = {
     /**
      * No description
@@ -4430,7 +4504,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** Filter on the type of the campaigns */
         type?: "classic" | "trigger";
         /** Filter on the status of the campaign */
-        status?: "suspended" | "archive" | "sent" | "queued" | "draft" | "inProcess";
+        status?:
+          | "suspended"
+          | "archive"
+          | "sent"
+          | "queued"
+          | "draft"
+          | "inProcess";
         /** Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response. */
         statistics?: "globalStats" | "linksStats" | "statsByDomain";
         /**
@@ -4479,7 +4559,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/emailCampaigns
      * @secure
      */
-    createEmailCampaign: (emailCampaigns: CreateEmailCampaign, params: RequestParams = {}) =>
+    createEmailCampaign: (
+      emailCampaigns: CreateEmailCampaign,
+      params: RequestParams = {},
+    ) =>
       this.request<CreateModel, ErrorModel>({
         path: `/emailCampaigns`,
         method: "POST",
@@ -4503,7 +4586,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       campaignId: number,
       query?: {
         /** Filter on type of the statistics required. Example **globalStats** value will only fetch globalStats info of the campaign in returned response. */
-        statistics?: "globalStats" | "linksStats" | "statsByDomain" | "statsByDevice" | "statsByBrowser";
+        statistics?:
+          | "globalStats"
+          | "linksStats"
+          | "statsByDomain"
+          | "statsByDevice"
+          | "statsByBrowser";
       },
       params: RequestParams = {},
     ) =>
@@ -4525,7 +4613,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/emailCampaigns/{campaignId}
      * @secure
      */
-    updateEmailCampaign: (campaignId: number, emailCampaign: UpdateEmailCampaign, params: RequestParams = {}) =>
+    updateEmailCampaign: (
+      campaignId: number,
+      emailCampaign: UpdateEmailCampaign,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/emailCampaigns/${campaignId}`,
         method: "PUT",
@@ -4578,7 +4670,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/emailCampaigns/{campaignId}/sendTest
      * @secure
      */
-    sendTestEmail: (campaignId: number, emailTo: SendTestEmail, params: RequestParams = {}) =>
+    sendTestEmail: (
+      campaignId: number,
+      emailTo: SendTestEmail,
+      params: RequestParams = {},
+    ) =>
       this.request<void, PostSendFailed | ErrorModel>({
         path: `/emailCampaigns/${campaignId}/sendTest`,
         method: "POST",
@@ -4596,7 +4692,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/emailCampaigns/{campaignId}/status
      * @secure
      */
-    updateCampaignStatus: (campaignId: number, status: UpdateCampaignStatus, params: RequestParams = {}) =>
+    updateCampaignStatus: (
+      campaignId: number,
+      status: UpdateCampaignStatus,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/emailCampaigns/${campaignId}/status`,
         method: "PUT",
@@ -4615,7 +4715,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/emailCampaigns/{campaignId}/sendReport
      * @secure
      */
-    sendReport: (campaignId: number, sendReport: SendReport, params: RequestParams = {}) =>
+    sendReport: (
+      campaignId: number,
+      sendReport: SendReport,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/emailCampaigns/${campaignId}/sendReport`,
         method: "POST",
@@ -4669,7 +4773,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/emailCampaigns/{campaignId}/exportRecipients
      * @secure
      */
-    emailExportRecipients: (campaignId: number, recipientExport: EmailExportRecipients, params: RequestParams = {}) =>
+    emailExportRecipients: (
+      campaignId: number,
+      recipientExport: EmailExportRecipients,
+      params: RequestParams = {},
+    ) =>
       this.request<CreatedProcessId, ErrorModel>({
         path: `/emailCampaigns/${campaignId}/exportRecipients`,
         method: "POST",
@@ -4689,7 +4797,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/emailCampaigns/images
      * @secure
      */
-    uploadImageToGallery: (uploadImage: UploadImageToGallery, params: RequestParams = {}) =>
+    uploadImageToGallery: (
+      uploadImage: UploadImageToGallery,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/emailCampaigns/images`,
         method: "POST",
@@ -4709,7 +4820,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/smtp/email
      * @secure
      */
-    sendTransacEmail: (sendSmtpEmail: SendSmtpEmail, params: RequestParams = {}) =>
+    sendTransacEmail: (
+      sendSmtpEmail: SendSmtpEmail,
+      params: RequestParams = {},
+    ) =>
       this.request<CreateSmtpEmail, ErrorModel>({
         path: `/smtp/email`,
         method: "POST",
@@ -4844,7 +4958,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/smtp/templates
      * @secure
      */
-    createSmtpTemplate: (smtpTemplate: CreateSmtpTemplate, params: RequestParams = {}) =>
+    createSmtpTemplate: (
+      smtpTemplate: CreateSmtpTemplate,
+      params: RequestParams = {},
+    ) =>
       this.request<CreateModel, ErrorModel>({
         path: `/smtp/templates`,
         method: "POST",
@@ -4882,7 +4999,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/smtp/templates/{templateId}
      * @secure
      */
-    updateSmtpTemplate: (templateId: number, smtpTemplate: UpdateSmtpTemplate, params: RequestParams = {}) =>
+    updateSmtpTemplate: (
+      templateId: number,
+      smtpTemplate: UpdateSmtpTemplate,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/smtp/templates/${templateId}`,
         method: "PUT",
@@ -4918,7 +5039,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/smtp/templates/{templateId}/sendTest
      * @secure
      */
-    sendTestTemplate: (templateId: number, sendTestEmail: SendTestEmail, params: RequestParams = {}) =>
+    sendTestTemplate: (
+      templateId: number,
+      sendTestEmail: SendTestEmail,
+      params: RequestParams = {},
+    ) =>
       this.request<void, PostSendFailed | ErrorModel>({
         path: `/smtp/templates/${templateId}/sendTest`,
         method: "POST",
@@ -5194,7 +5319,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/smtp/deleteHardbounces
      * @secure
      */
-    deleteHardbounces: (deleteHardbounces: DeleteHardbounces, params: RequestParams = {}) =>
+    deleteHardbounces: (
+      deleteHardbounces: DeleteHardbounces,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/smtp/deleteHardbounces`,
         method: "POST",
@@ -5214,7 +5342,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @deprecated
      * @secure
      */
-    sendTemplate: (templateId: number, sendEmail: SendEmail, params: RequestParams = {}) =>
+    sendTemplate: (
+      templateId: number,
+      sendEmail: SendEmail,
+      params: RequestParams = {},
+    ) =>
       this.request<SendTemplateEmail, PostSendFailed | ErrorModel>({
         path: `/smtp/templates/${templateId}/send`,
         method: "POST",
@@ -5306,7 +5438,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/contacts/doubleOptinConfirmation
      * @secure
      */
-    createDoiContact: (createDoiContact: CreateDoiContact, params: RequestParams = {}) =>
+    createDoiContact: (
+      createDoiContact: CreateDoiContact,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/contacts/doubleOptinConfirmation`,
         method: "POST",
@@ -5343,7 +5478,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/contacts/{email}
      * @secure
      */
-    updateContact: (email: string, updateContact: UpdateContact, params: RequestParams = {}) =>
+    updateContact: (
+      email: string,
+      updateContact: UpdateContact,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/contacts/${email}`,
         method: "PUT",
@@ -5432,7 +5571,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     createAttribute: (
-      attributeCategory: "normal" | "transactional" | "category" | "calculated" | "global",
+      attributeCategory:
+        | "normal"
+        | "transactional"
+        | "category"
+        | "calculated"
+        | "global",
       attributeName: string,
       createAttribute: CreateAttribute,
       params: RequestParams = {},
@@ -5480,7 +5624,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      */
     deleteAttribute: (
-      attributeCategory: "normal" | "transactional" | "category" | "calculated" | "global",
+      attributeCategory:
+        | "normal"
+        | "transactional"
+        | "category"
+        | "calculated"
+        | "global",
       attributeName: string,
       params: RequestParams = {},
     ) =>
@@ -5541,7 +5690,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/contacts/folders
      * @secure
      */
-    createFolder: (createFolder: CreateUpdateFolder, params: RequestParams = {}) =>
+    createFolder: (
+      createFolder: CreateUpdateFolder,
+      params: RequestParams = {},
+    ) =>
       this.request<CreateModel, ErrorModel>({
         path: `/contacts/folders`,
         method: "POST",
@@ -5619,7 +5771,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/contacts/folders/{folderId}
      * @secure
      */
-    updateFolder: (folderId: number, updateFolder: CreateUpdateFolder, params: RequestParams = {}) =>
+    updateFolder: (
+      folderId: number,
+      updateFolder: CreateUpdateFolder,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/contacts/folders/${folderId}`,
         method: "PUT",
@@ -5775,7 +5931,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/contacts/lists/{listId}
      * @secure
      */
-    updateList: (listId: number, updateList: UpdateList, params: RequestParams = {}) =>
+    updateList: (
+      listId: number,
+      updateList: UpdateList,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/contacts/lists/${listId}`,
         method: "PUT",
@@ -5858,7 +6018,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/contacts/lists/{listId}/contacts/add
      * @secure
      */
-    addContactToList: (listId: number, contactEmails: AddContactToList, params: RequestParams = {}) =>
+    addContactToList: (
+      listId: number,
+      contactEmails: AddContactToList,
+      params: RequestParams = {},
+    ) =>
       this.request<PostContactInfo, ErrorModel>({
         path: `/contacts/lists/${listId}/contacts/add`,
         method: "POST",
@@ -5878,7 +6042,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/contacts/lists/{listId}/contacts/remove
      * @secure
      */
-    removeContactFromList: (listId: number, contactEmails: RemoveContactFromList, params: RequestParams = {}) =>
+    removeContactFromList: (
+      listId: number,
+      contactEmails: RemoveContactFromList,
+      params: RequestParams = {},
+    ) =>
       this.request<PostContactInfo, ErrorModel>({
         path: `/contacts/lists/${listId}/contacts/remove`,
         method: "POST",
@@ -5898,7 +6066,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/contacts/export
      * @secure
      */
-    requestContactExport: (requestContactExport: RequestContactExport, params: RequestParams = {}) =>
+    requestContactExport: (
+      requestContactExport: RequestContactExport,
+      params: RequestParams = {},
+    ) =>
       this.request<CreatedProcessId, ErrorModel>({
         path: `/contacts/export`,
         method: "POST",
@@ -5918,7 +6089,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/contacts/import
      * @secure
      */
-    importContacts: (requestContactImport: RequestContactImport, params: RequestParams = {}) =>
+    importContacts: (
+      requestContactImport: RequestContactImport,
+      params: RequestParams = {},
+    ) =>
       this.request<CreatedProcessId, ErrorModel>({
         path: `/contacts/import`,
         method: "POST",
@@ -5942,7 +6116,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getSmsCampaigns: (
       query?: {
         /** Status of campaign. */
-        status?: "suspended" | "archive" | "sent" | "queued" | "draft" | "inProcess";
+        status?:
+          | "suspended"
+          | "archive"
+          | "sent"
+          | "queued"
+          | "draft"
+          | "inProcess";
         /**
          * Mandatory if endDate is used. Starting (urlencoded) UTC date-time (YYYY-MM-DDTHH:mm:ss.SSSZ) to filter the sent sms campaigns. Prefer to pass your timezone in date-time format for accurate result ( only available if either 'status' not passed and if passed is set to 'sent' )
          * @format date-time
@@ -5987,7 +6167,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/smsCampaigns
      * @secure
      */
-    createSmsCampaign: (createSmsCampaign: CreateSmsCampaign, params: RequestParams = {}) =>
+    createSmsCampaign: (
+      createSmsCampaign: CreateSmsCampaign,
+      params: RequestParams = {},
+    ) =>
       this.request<CreateModel, ErrorModel>({
         path: `/smsCampaigns`,
         method: "POST",
@@ -6025,7 +6208,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/smsCampaigns/{campaignId}
      * @secure
      */
-    updateSmsCampaign: (campaignId: number, updateSmsCampaign: UpdateSmsCampaign, params: RequestParams = {}) =>
+    updateSmsCampaign: (
+      campaignId: number,
+      updateSmsCampaign: UpdateSmsCampaign,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/smsCampaigns/${campaignId}`,
         method: "PUT",
@@ -6078,7 +6265,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/smsCampaigns/{campaignId}/status
      * @secure
      */
-    updateSmsCampaignStatus: (campaignId: number, status: UpdateCampaignStatus, params: RequestParams = {}) =>
+    updateSmsCampaignStatus: (
+      campaignId: number,
+      status: UpdateCampaignStatus,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/smsCampaigns/${campaignId}/status`,
         method: "PUT",
@@ -6097,7 +6288,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/smsCampaigns/{campaignId}/sendTest
      * @secure
      */
-    sendTestSms: (campaignId: number, phoneNumber: SendTestSms, params: RequestParams = {}) =>
+    sendTestSms: (
+      campaignId: number,
+      phoneNumber: SendTestSms,
+      params: RequestParams = {},
+    ) =>
       this.request<void, PostSendSmsTestFailed | ErrorModel>({
         path: `/smsCampaigns/${campaignId}/sendTest`,
         method: "POST",
@@ -6140,7 +6335,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/smsCampaigns/{campaignId}/sendReport
      * @secure
      */
-    sendSmsReport: (campaignId: number, sendReport: SendReport, params: RequestParams = {}) =>
+    sendSmsReport: (
+      campaignId: number,
+      sendReport: SendReport,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/smsCampaigns/${campaignId}/sendReport`,
         method: "POST",
@@ -6159,7 +6358,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/transactionalSMS/sms
      * @secure
      */
-    sendTransacSms: (sendTransacSms: SendTransacSms, params: RequestParams = {}) =>
+    sendTransacSms: (
+      sendTransacSms: SendTransacSms,
+      params: RequestParams = {},
+    ) =>
       this.request<SendSms, ErrorModel>({
         path: `/transactionalSMS/sms`,
         method: "POST",
@@ -6497,7 +6699,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/senders/{senderId}
      * @secure
      */
-    updateSender: (senderId: number, sender: UpdateSender, params: RequestParams = {}) =>
+    updateSender: (
+      senderId: number,
+      sender: UpdateSender,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/senders/${senderId}`,
         method: "PUT",
@@ -6641,7 +6847,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/webhooks/{webhookId}
      * @secure
      */
-    updateWebhook: (webhookId: number, updateWebhook: UpdateWebhook, params: RequestParams = {}) =>
+    updateWebhook: (
+      webhookId: number,
+      updateWebhook: UpdateWebhook,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/webhooks/${webhookId}`,
         method: "PUT",
@@ -6714,7 +6924,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/reseller/children
      * @secure
      */
-    createResellerChild: (resellerChild: CreateChild, params: RequestParams = {}) =>
+    createResellerChild: (
+      resellerChild: CreateChild,
+      params: RequestParams = {},
+    ) =>
       this.request<CreateReseller, ErrorModel>({
         path: `/reseller/children`,
         method: "POST",
@@ -6752,7 +6965,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/reseller/children/{childIdentifier}
      * @secure
      */
-    updateResellerChild: (childIdentifier: string, resellerChild: UpdateChild, params: RequestParams = {}) =>
+    updateResellerChild: (
+      childIdentifier: string,
+      resellerChild: UpdateChild,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/reseller/children/${childIdentifier}`,
         method: "PUT",
@@ -6771,7 +6988,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/reseller/children/{childIdentifier}
      * @secure
      */
-    deleteResellerChild: (childIdentifier: string, params: RequestParams = {}) =>
+    deleteResellerChild: (
+      childIdentifier: string,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/reseller/children/${childIdentifier}`,
         method: "DELETE",
@@ -6811,7 +7031,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/reseller/children/{childIdentifier}/accountCreationStatus
      * @secure
      */
-    getChildAccountCreationStatus: (childIdentifier: string, params: RequestParams = {}) =>
+    getChildAccountCreationStatus: (
+      childIdentifier: string,
+      params: RequestParams = {},
+    ) =>
       this.request<GetChildAccountCreationStatus, ErrorModel>({
         path: `/reseller/children/${childIdentifier}/accountCreationStatus`,
         method: "GET",
@@ -6829,7 +7052,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/reseller/children/{childIdentifier}/ips/associate
      * @secure
      */
-    associateIpToChild: (childIdentifier: string, ip: ManageIp, params: RequestParams = {}) =>
+    associateIpToChild: (
+      childIdentifier: string,
+      ip: ManageIp,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/reseller/children/${childIdentifier}/ips/associate`,
         method: "POST",
@@ -6848,7 +7075,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/reseller/children/{childIdentifier}/ips/dissociate
      * @secure
      */
-    dissociateIpFromChild: (childIdentifier: string, ip: ManageIp, params: RequestParams = {}) =>
+    dissociateIpFromChild: (
+      childIdentifier: string,
+      ip: ManageIp,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/reseller/children/${childIdentifier}/ips/dissociate`,
         method: "POST",
@@ -6867,7 +7098,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/reseller/children/{childIdentifier}/credits/add
      * @secure
      */
-    addCredits: (childIdentifier: string, addCredits: AddCredits, params: RequestParams = {}) =>
+    addCredits: (
+      childIdentifier: string,
+      addCredits: AddCredits,
+      params: RequestParams = {},
+    ) =>
       this.request<RemainingCreditModel, ErrorModel>({
         path: `/reseller/children/${childIdentifier}/credits/add`,
         method: "POST",
@@ -6887,7 +7122,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/reseller/children/{childIdentifier}/credits/remove
      * @secure
      */
-    removeCredits: (childIdentifier: string, removeCredits: RemoveCredits, params: RequestParams = {}) =>
+    removeCredits: (
+      childIdentifier: string,
+      removeCredits: RemoveCredits,
+      params: RequestParams = {},
+    ) =>
       this.request<RemainingCreditModel, ErrorModel>({
         path: `/reseller/children/${childIdentifier}/credits/remove`,
         method: "POST",
@@ -6925,7 +7164,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request POST:/reseller/children/{childIdentifier}/domains
      * @secure
      */
-    createChildDomain: (childIdentifier: string, addChildDomain: AddChildDomain, params: RequestParams = {}) =>
+    createChildDomain: (
+      childIdentifier: string,
+      addChildDomain: AddChildDomain,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/reseller/children/${childIdentifier}/domains`,
         method: "POST",
@@ -6968,7 +7211,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/reseller/children/{childIdentifier}/domains/{domainName}
      * @secure
      */
-    deleteChildDomain: (childIdentifier: string, domainName: string, params: RequestParams = {}) =>
+    deleteChildDomain: (
+      childIdentifier: string,
+      domainName: string,
+      params: RequestParams = {},
+    ) =>
       this.request<void, ErrorModel>({
         path: `/reseller/children/${childIdentifier}/domains/${domainName}`,
         method: "DELETE",
