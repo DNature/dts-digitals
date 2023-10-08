@@ -16,16 +16,6 @@ const team = [
     title: "Co-Founder. Full-Stack & Mobile & Web Developer",
     image: "/team/success.jpg",
   },
-  {
-    name: "Sandra De Jong",
-    title: "Sales & Marketting",
-    image: "/team/sandra.jpeg",
-  },
-  {
-    name: "Katerista Dmitry",
-    title: "UI/UX Designer",
-    image: "/team/kate.jpeg",
-  },
 ];
 
 export function OurTeam() {
