@@ -36,16 +36,6 @@ export const worksData = [
     tags: ["#open-source", "#react", "#typescript"],
   },
   {
-    title: "Cleanfits",
-    description:
-      "Cleanfits is an imaginary laundry and dry cleaning agency. It lets users book cleaning appointments, track delivery and pay online.!",
-    imageUrl:
-      "https://res.cloudinary.com/dnature/image/upload/c_scale,w_0.8/v1614509870/works/clean-fits_x1m6uf.png",
-    githubUrl: "http://github.com/DNature/cleanfits_original",
-    websiteUrl: "http://cleanfits.herokuapp.com/",
-    tags: ["#react", "#ui"],
-  },
-  {
     title: "CombatCovid",
     description:
       "Combat covid with hardware Search for well documented designs 🔍 and document new solutions.",
@@ -54,25 +44,5 @@ export const worksData = [
     githubUrl: "http://github.com/CombatCovid",
     websiteUrl: "http://combatcovid.equipment/",
     tags: ["#open-source", "#vue"],
-  },
-  {
-    title: "CRWN Clothing",
-    description:
-      "CRWN clothing is an imaginary e-commerce clothing store. Some features includes payment with stripe, redux for global state management, firebase and lots more.",
-    imageUrl:
-      "https://res.cloudinary.com/dnature/image/upload/c_scale,w_0.8/v1614461940/works/crwn-clothing_eqs9nt.png",
-    githubUrl: "http://github.com/DNature/crwn-clothing-e-commerce",
-    websiteUrl: "http://crwn-clothing-navy-ten.now.sh/",
-    tags: ["#react", "#e-commerce", "#firebase"],
-  },
-  {
-    title: "Movie Time",
-    description:
-      "A web app for booking movie tickets from a fictional cinema. It features movie trailers, rating, description, online payment and email notifications.!",
-    imageUrl:
-      "https://res.cloudinary.com/dnature/image/upload/c_scale,w_0.8/v1614465254/works/movies-time_szkzpw.png",
-    githubUrl: "http://github.com/DNature/movietime",
-    websiteUrl: "http://movietimesng.herokuapp.com/",
-    tags: ["#react", "#ui"],
   },
 ];
