@@ -1,5 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
+const BookConsultationButton = () => (
+  <Link href="/contact" className="mt-4 text-lg btn">
+    Book a free consultation
+  </Link>
+);
 export function OurServices() {
   return (
     <section
@@ -27,9 +33,7 @@ export function OurServices() {
                     and engaging user experience.
                   </p>
 
-                  <button className="mt-4 text-lg btn">
-                    Let work together
-                  </button>
+                  <BookConsultationButton />
                 </div>
                 <div className="relative p-4 mt-6 h-96 sm:mt-0">
                   <Image
@@ -58,9 +62,7 @@ export function OurServices() {
                     conversions.
                   </p>
 
-                  <button className="mt-4 text-lg btn">
-                    Let work together
-                  </button>
+                  <BookConsultationButton />
                 </div>
                 <div className="relative p-4 mt-6 h-96 sm:mt-0">
                   <Image
@@ -88,10 +90,7 @@ export function OurServices() {
                     your specific industry needs, ensuring secure, transparent,
                     and efficient solutions.
                   </p>
-
-                  <button className="mt-4 text-lg btn">
-                    Let work together
-                  </button>
+                  <BookConsultationButton />
                 </div>
                 <div className="relative p-4 mt-6 h-96 sm:mt-0">
                   <Image
@@ -121,9 +120,7 @@ export function OurServices() {
                     satisfied.
                   </p>
 
-                  <button className="mt-4 text-lg btn">
-                    Let work together
-                  </button>
+                  <BookConsultationButton />
                 </div>
                 <div className="relative p-4 mt-6 h-96 sm:mt-0">
                   <Image
@@ -152,9 +149,7 @@ export function OurServices() {
                     enhancing transparency and security while reducing friction.
                   </p>
 
-                  <button className="mt-4 text-lg btn">
-                    Let work together
-                  </button>
+                  <BookConsultationButton />
                 </div>
                 <div className="relative p-4 mt-6 h-96 sm:mt-0">
                   <Image
@@ -170,6 +165,91 @@ export function OurServices() {
           </div>
           <div className="py-10 md:px-6 collapse collapse-arrow bg-white/50">
             <input type="radio" name="services" />
+            <h4 className="font-medium collapse-title">NFT Marketplace</h4>
+            <div className="collapse-content">
+              <div className="grid sm:grid-cols-2">
+                <div className="flex flex-col justify-center items-start ml-4 max-w-md">
+                  <p className="text-lg">
+                    We will develop your NFT Marketplace, IDO Launchpads, P2E
+                    platforms and Launch end-to-end by creating a killer smart
+                    contract backend, optimized and seamless UI/UX and generate
+                    your unique collection.
+                  </p>
+
+                  <BookConsultationButton />
+                </div>
+                <div className="relative p-4 mt-6 h-96 sm:mt-0">
+                  <Image
+                    src={"/images/software-design.jpg"}
+                    alt="image"
+                    layout="fill"
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="py-10 md:px-6 collapse collapse-arrow bg-white/50">
+            <input type="radio" name="services" />
+            <h4 className="font-medium collapse-title">ERC-20 tokens</h4>
+            <div className="collapse-content">
+              <div className="grid sm:grid-cols-2">
+                <div className="flex flex-col justify-center items-start ml-4 max-w-md">
+                  <p className="text-lg">
+                    We will develop and help you launch a custom ERC-20 token
+                    with burn, buyback, tax, reflections, rebase or any other
+                    feature you may need. We will also work out robust and
+                    sustainable tokenomics and help you setup a whitepaper for
+                    your token.
+                  </p>
+
+                  <BookConsultationButton />
+                </div>
+                <div className="relative p-4 mt-6 h-96 sm:mt-0">
+                  <Image
+                    src={"/images/software-design.jpg"}
+                    alt="image"
+                    layout="fill"
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="py-10 md:px-6 collapse collapse-arrow bg-white/50">
+            <input type="radio" name="services" />
+            <h4 className="font-medium collapse-title">DEFI Development</h4>
+            <div className="collapse-content">
+              <div className="grid sm:grid-cols-2">
+                <div className="flex flex-col justify-center items-start ml-4 max-w-md">
+                  <p className="text-lg">
+                    Decentralized Exchanges, DEX Aggregators, Lending &
+                    Borrowing platforms, Yield farming applications, LP Lockers.
+                    We help you work out, create and launch complicated DEFI
+                    products that will impress even the savviest crypto
+                    enthusiast.
+                  </p>
+
+                  <BookConsultationButton />
+                </div>
+                <div className="relative p-4 mt-6 h-96 sm:mt-0">
+                  <Image
+                    src={"/images/software-design.jpg"}
+                    alt="image"
+                    layout="fill"
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="py-10 md:px-6 collapse collapse-arrow bg-white/50">
+            <input type="radio" name="services" />
             <h4 className="font-medium collapse-title">
               Smart Contract Audit Services
             </h4>
@@ -183,9 +263,7 @@ export function OurServices() {
                     peace of mind they deserve.
                   </p>
 
-                  <button className="mt-4 text-lg btn">
-                    Let work together
-                  </button>
+                  <BookConsultationButton />
                 </div>
                 <div className="relative p-4 mt-6 h-96 sm:mt-0">
                   <Image
@@ -214,9 +292,7 @@ export function OurServices() {
                     a broader audience.
                   </p>
 
-                  <button className="mt-4 text-lg btn">
-                    Let work together
-                  </button>
+                  <BookConsultationButton />
                 </div>
                 <div className="relative p-4 mt-6 h-96 sm:mt-0">
                   <Image
