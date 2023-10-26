@@ -8,7 +8,7 @@ const team = [
   },
   {
     name: "Tareq Abdalla",
-    title: "Co-Founder. Full-Stack & Senior BlockChain Engineer",
+    title: "Co-Founder. Frontend Developer",
     image: "/team/tarek.jpeg",
   },
   {
