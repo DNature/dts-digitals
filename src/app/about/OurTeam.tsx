@@ -3,18 +3,18 @@ import Image from "next/image";
 const team = [
   {
     name: "Divine Hycenth",
-    title: "Co-Founder. Full-Stack & Senior BlockChain Engineer",
+    title: "Full-Stack Engineer",
     image: "/team/divine.png",
   },
   {
-    name: "Tareq Abdalla",
-    title: "Co-Founder. Frontend Developer",
-    image: "/team/tarek.jpeg",
+    name: "Success Hycenth",
+    title: "Software Developer - Mobile & Web",
+    image: "/team/success.jpg",
   },
   {
-    name: "Success Hycenth",
-    title: "Co-Founder. Full-Stack & Mobile & Web Developer",
-    image: "/team/success.jpg",
+    name: "Joseph Chikeme",
+    title: "Full-Stack Engineer",
+    image: "/team/joe.jpeg",
   },
 ];
 
@@ -22,9 +22,9 @@ export function OurTeam() {
   return (
     <section className="w-full bg-[url(/get-bg.svg)] py-40 px-4 mt-10">
       <div className="mx-auto max-w-screen-lg">
-        <h2 data-aos="zoom-in-up" className="mb-10">
-          Meet Our Team
-        </h2>
+        <h3 data-aos="zoom-in-up" className="mb-10">
+          Meet Our Leadership Team
+        </h3>
 
         <div className="grid grid-cols-2 gap-10 md:grid-cols-3">
           {team.map((i, idx) => (
